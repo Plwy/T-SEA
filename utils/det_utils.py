@@ -104,8 +104,11 @@ def plot_boxes_cv2(imgfile, boxes, class_names, savename=None):
             c1, c2 = (x1, y1), (x2, y2)
             c3 = (c1[0] + t_size[0], c1[1] - t_size[1] - 3)
 
-            cv2.rectangle(img, (x1, y1), (np.int(c3[0]), np.int(c3[1])), rgb, -1)
-            img = cv2.putText(img, msg, (c1[0], np.int(c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0),
+            # cv2.rectangle(img, (x1, y1), (np.int(c3[0]), np.int(c3[1])), rgb, -1)
+            # img = cv2.putText(img, msg, (c1[0], np.int(c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0),
+            #                   bbox_thick // 2, lineType=cv2.LINE_AA)
+            cv2.rectangle(img, (x1, y1), (int(c3[0]), int(c3[1])), rgb, -1)
+            img = cv2.putText(img, msg, (c1[0], int(c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0),
                               bbox_thick // 2, lineType=cv2.LINE_AA)
         img = cv2.rectangle(img, (x1, y1), (x2, y2), rgb, bbox_thick)
     if savename:
