@@ -9,10 +9,10 @@ from torchvision.models.detection import ssdlite320_mobilenet_v3_large, fasterrc
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.append(PROJECT_DIR)
 from PIL import Image
-from tools.convertor import FormatConverter
+from utils.convertor import FormatConverter
 from detlib.utils import init_detector
-from tools.det_utils import plot_boxes_cv2
-from tools.parser import ConfigParser
+from utils.det_utils import plot_boxes_cv2
+from utils.parser import ConfigParser
 import time
 
 
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     # exit()
     parser = argparse.ArgumentParser()
     parser.add_argument('-cfg', '--cfg', type=str, default='baseline/v3.yaml')
-    parser.add_argument('-s', '--save_path', type=str, default='./captrue/')
+    parser.add_argument('-s', '--save_path', type=str, default='./capture/')
     args = parser.parse_args()
     args.cfg = './configs/' + args.cfg
     cfg = ConfigParser(args.cfg)
