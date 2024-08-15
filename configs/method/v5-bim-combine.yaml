@@ -3,7 +3,7 @@ DATA:
   AUGMENT: 1
 
   TRAIN:
-    IMG_DIR: 'data/INRIAPerson/Train/pos'
+    IMG_DIR: "/media/sun/disk11/adversarial_attack_proj/T-SEA/download/59_INRIA Person Dataset/INRIAPerson/Train/pos" #'data/INRIAPerson/Train/pos'
     LAB_DIR:
 
 DETECTOR:

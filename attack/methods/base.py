@@ -54,6 +54,7 @@ class BaseAttacker(Optimizer):
         losses = []
         for iter in range(self.iter_step):
             if iter > 0: ori_tensor_batch = ori_tensor_batch.clone()
+            # 根据预测框，将对抗patch，贴图到原图上，得到对抗图像
             adv_tensor_batch = self.detector_attacker.uap_apply(ori_tensor_batch)
             adv_tensor_batch = adv_tensor_batch.to(detector.device)
             # detect adv img batch to get bbox and obj confs
@@ -71,7 +72,7 @@ class BaseAttacker(Optimizer):
                 confs = torch.mean(confs, dim=-1)
             else:
                 # only attack the max confidence
-                confs = confs.max(dim=-1, keepdim=True)[0]
+                confs = confs.max(dim=-1, keepdim=True)[0] #这里得到的(8,1),属于是每张图的目标类的最大置信度框
 
             detector.zero_grad()
             # print('confs', confs)

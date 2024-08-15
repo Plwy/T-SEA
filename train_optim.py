@@ -17,12 +17,13 @@ def init(detector_attacker: UniversalAttacker, cfg: ConfigParser, data_root: str
     if log: logger(cfg, args)
 
     data_sampler = None
+    # 加载训练数据集
     data_loader = dataLoader(data_root,
                              input_size=cfg.DETECTOR.INPUT_SIZE, is_augment=cfg.DATA.AUGMENT,
                              batch_size=cfg.DETECTOR.BATCH_SIZE, sampler=data_sampler, shuffle=True)
-
-    detector_attacker.init_universal_patch(args.patch)
-    detector_attacker.init_attaker()
+    # patch初始化. input image,random,gray,white
+    detector_attacker.init_universal_patch(args.patch) #
+    detector_attacker.init_attaker() # 设置攻击方法 loss 等
 
     vlogger = None
     if log and args and not args.debugging:

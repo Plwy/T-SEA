@@ -100,12 +100,12 @@ class UniversalAttacker(object):
         for i_batch, preds in enumerate(all_preds):
             if len(preds) == 0:
                 preds = torch.cuda.FloatTensor([[0, 0, 0, 0, 0, 0]])
-            preds = self.filter_bbox(preds)
-            padded_boxs = pad_lab(preds, self.max_boxes).unsqueeze(0)
+            preds = self.filter_bbox(preds)  # 过滤出包含目标类对象的框 shape:(target_box_num, 6)
+            padded_boxs = pad_lab(preds, self.max_boxes).unsqueeze(0) # shape:(1,self.max_boxes, 6)
             batch_boxes = padded_boxs if batch_boxes is None else torch.vstack((batch_boxes, padded_boxs))
             target_nums.append(len(preds))
         self.all_preds = batch_boxes
-        return np.array(target_nums)
+        return np.array(target_nums)  # shape (batchsize, self.max_boxes, 6)
 
     def uap_apply(self, img_tensor: torch.Tensor, adv_patch: torch.Tensor=None):
         """To attach the uap(universal adversarial patch) onto the image samples.
@@ -164,6 +164,7 @@ class UniversalAttacker(object):
         self.attacker.begin_attack()
         if mode == 'optim' or mode == 'sequential':
             for detector in self.detectors:
+                # 输入原始图和检测器,返回当前对抗patch的loss
                 loss = self.attacker.non_targeted_attack(img_tensor_batch, detector)
                 detectors_loss.append(loss)
         elif mode == 'parallel':

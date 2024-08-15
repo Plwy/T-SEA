@@ -18,4 +18,4 @@ ln -s $det_lib/weights/yolov4-tiny.weights $det_lib/HHDet/yolov4/Pytorch_YOLOv4/
 mkdir $det_lib/HHDet/yolov5/yolov5/weight
 ln -s $det_lib/weights/yolov5n.pt $det_lib/HHDet/yolov5/yolov5/weight/yolov5n.pt
 ln -s $det_lib/weights/yolov5s.pt $det_lib/HHDet/yolov5/yolov5/weight/yolov5s.pt
-ln -s $det_lib/weights/yolov5s6.pt $det_lib/HHDet/yolov5/yolov5/weight/yolov5s6.pt
+# ln -s $det_lib/weights/yolov5s6.pt $det_lib/HHDet/yolov5/yolov5/weight/yolov5s6.pt
