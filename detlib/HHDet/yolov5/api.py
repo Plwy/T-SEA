@@ -35,7 +35,7 @@ class HHYolov5(DetectorBase):
     def __call__(self, batch_tensor, **kwargs):
         # print('yolov5 api call')
         detections_with_grad = self.detector(batch_tensor, augment=False, visualize=False)[0]
-        preds = non_max_suppression(detections_with_grad, self.conf_thres, self.iou_thres) # [batch, num, 6] e.g., [1, 22743, 1, 4]
+        preds = non_max_suppression(detections_with_grad.detach(), self.conf_thres, self.iou_thres) # [batch, num, 6] e.g., [1, 22743, 1, 4]
 
         cls_max_ids = None
         bbox_array = []
